@@ -16,7 +16,7 @@ class mover{
   void show(){
     pushMatrix();
     translate(loc.x,loc.y);
-    rotate(radians(heading+HALF_PI));
+    rotate(radians(heading));
     fill(0);
     stroke(255);
     strokeWeight(4);

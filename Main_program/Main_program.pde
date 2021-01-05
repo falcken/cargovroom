@@ -1,4 +1,3 @@
-
 ArrayList<mover> movers = new ArrayList<mover>();
 
 void setup() {
