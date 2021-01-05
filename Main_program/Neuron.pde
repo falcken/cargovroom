@@ -7,7 +7,7 @@ class Neuron {
   Neuron(int connNumber){
   connections = new ArrayList<Connection>();
   
-  for(int i; i < connNumber; i++){
+  for(int i = 0; i < connNumber; i++){
     Connection conn = new Connection();
     addConnection(conn);
     float tempweight = conn.getWeight();
@@ -21,8 +21,8 @@ class Neuron {
   void addConnection(Connection c){
     connections.add(c);
   }
-  /*void setBias(float tempBias){
+  void setBias(float tempBias){
     bias = tempBias;
-  }*/
+  }
   
 }
