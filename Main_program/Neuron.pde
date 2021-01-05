@@ -3,6 +3,8 @@ class Neuron {
   FloatList connectionWeights = new FloatList();
   
   float bias = 1;
+  float neuronInput;
+  float neuronOutput;
   
   Neuron(int connNumber){
   connections = new ArrayList<Connection>();
@@ -25,4 +27,22 @@ class Neuron {
     bias = tempBias;
   }
   
+  float getNeuronOutput(float[] LI){
+    if(LI.length != connections.size()){
+      exit();
+    }
+    neuronInput = 0;
+    
+    for(int i = 0; i < connections.size(); i++){
+      neuronInput += connections.get(i).calcConnOutput(LI[i]);
+    }
+    neuronInput += bias;
+    neuronOutput = ActivateValue(neuronInput);
+    return neuronOutput;
+  }
+  
+  float ActivateValue(float input){
+    float value = (2 / (1 + exp(-1 * (input * 2)))) -1;
+    return value;
+  }
 }
