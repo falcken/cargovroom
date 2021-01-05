@@ -1,3 +1,4 @@
 //lav et NN
 
-// send antal Neuroner
+
+FloatList newWeights = new FloatList(); // skal indeholde de nye vægte man vil havde sat i et nyt netværk
