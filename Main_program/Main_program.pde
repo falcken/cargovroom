@@ -1,18 +1,18 @@
-ArrayList<mover> movers = new ArrayList<mover>();
+World world;
+
+int numE = 2;
 
 void setup() {
   size(600, 600);
 
-  movers.add(new mover(width/2, height/2, 20));
+  world = new World(numE);
 }
+
 
 void draw() {
   background(0);
-  for (int i = 0; i < movers.size(); i++) {
-    mover m = movers.get(i);
-    m.show();
-    m.update();
-  }
+  world.runSimulation();
+  
 }
 void keyPressed() {
   if (key == 'w') {
@@ -27,8 +27,8 @@ void keyPressed() {
       mover m = movers.get(i);
       m.turn(-1);
     }
-  } else if(key == 'd'){
-       for (int i = 0; i < movers.size(); i++) {
+  } else if (key == 'd') {
+    for (int i = 0; i < movers.size(); i++) {
       mover m = movers.get(i);
       m.turn(1);
     }
