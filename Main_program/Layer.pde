@@ -47,7 +47,7 @@ class Layer {
         exit();
       } else {
         for (int i=0; i<neuronCount; i++) {                                                              //calculate layer outputs
-          layerOutputs.append(neurons.get(i).getNeuronOutput(layerInputs);
+          layerOutputs.append(neurons.get(i).getNeuronOutput(layerInputs.array()));
         }
       }
     } else {
