@@ -17,7 +17,7 @@ class mover{
     pushMatrix();
     translate(loc.x,loc.y);
     rotate(radians(heading));
-    fill(0);
+    fill(255,0,0);
     stroke(255);
     strokeWeight(4);
     rectMode(CENTER);

@@ -1,17 +1,18 @@
-World world;
+World w;
 
-int numE = 2;
+int numE;
 
 void setup() {
   size(600, 600);
-
-  world = new World(numE);
+  numE = 2;
+  w = new World(numE);
+  
 }
 
 
 void draw() {
   background(0);
-  world.runSimulation();
+  w.runSimulation();
   
 }
 void keyPressed() {
