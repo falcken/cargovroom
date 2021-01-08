@@ -1,5 +1,5 @@
 class Neuron {
-  ArrayList<Connection> connections;
+  ArrayList<Connection> connections= new ArrayList<Connection>();;
   FloatList connectionWeights = new FloatList();
 
   float bias = 1;
@@ -7,7 +7,7 @@ class Neuron {
   float neuronOutput;
 
   Neuron(int connNumber) {
-    connections = new ArrayList<Connection>();
+  
 
     for (int i = 0; i < connNumber; i++) {
       Connection conn = new Connection();

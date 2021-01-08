@@ -47,7 +47,7 @@ class Layer {
   void setInputs(FloatList inputs) {
     layerInputs.clear();              //sæt inputs i et lag
     layerInputs = inputs.copy();
-    println("layerinputs" + layerInputs);
+   
   }
   void processInputsToOutputs() {       //lav inputs til outputs i et lag
     int neuronCount = neurons.size();

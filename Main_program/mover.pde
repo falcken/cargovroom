@@ -9,9 +9,9 @@ class mover {
 
   float heading = 0;
   float size;
-  float turnForce = 10;
-  float speed = 0.4;
-  float visionLength = 100;
+  float turnForce = 3;
+  float speed = 1;
+  float visionLength = 50;
   float angle, angle2, diff;
   float timer;
   float stoptimer = 0;
@@ -19,19 +19,20 @@ class mover {
   float totalright;
   float calfitness;
   FloatList moverInputs = new FloatList();
+  
   boolean dead = false;
+  
 
 
-  float fitness=1;
-
+  float fitness = 1;
   float dist1, dist2, dist3;
 
   NeuralNetwork NN = new NeuralNetwork();
   mover(NeuralNetwork network, PVector pos, float s) {
     NN = network;
-    NN.addLayer(3, 3);
-    NN.addLayer(3, 4);
-    NN.addLayer(4, 2);
+    NN.addLayer(3, 6);
+    NN.addLayer(6, 1);
+
 
     loc.set(pos);
     size=s;
@@ -73,14 +74,14 @@ class mover {
 
   void eyes() {
     strokeWeight(1);
-    PVector e1 = new PVector(1, 0);
+    PVector e1 = new PVector(1.5, 0);
     e1.mult(visionLength);
     line(0, 0, e1.x, e1.y);
     fill(0, 255, 0);
 
     // check walls
     for (int i = 0; i < visionLength; i++) {
-      PVector e = new PVector(1, 0);
+      PVector e = new PVector(1.5, 0);
       float x = e.x*i;
       float y = e.y*i;
       int realX = int(screenX(x, y));
@@ -198,11 +199,11 @@ class mover {
 
   void drive() {
     moverInputs.clear();
-    moverInputs.append(dist1);
     moverInputs.append(dist2);
+    moverInputs.append(dist1);
+    
     moverInputs.append(dist3);
-    println(dist1, dist2, dist3);
-    println(moverInputs);
+ 
    
 
 
@@ -211,9 +212,9 @@ class mover {
     PVector forward;
     forward = PVector.fromAngle(radians(heading));
     applyforce(forward);
-    if (NN.networkOutputs.get(0) > 0.5) {
+    if (NN.networkOutputs.get(0) > 0) {
       turn(-1);
-    } else if (NN.networkOutputs.get(0) < 0.5) {
+    } else if (NN.networkOutputs.get(0) < 0) {
       turn(1);
     } else {
     }

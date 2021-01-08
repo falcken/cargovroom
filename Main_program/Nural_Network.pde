@@ -13,7 +13,7 @@ class NeuralNetwork {
   void setInputs(FloatList newInputs) {                         //funktion til at sætte inputs i et netværk
     networkInputs.clear();
     networkInputs = newInputs.copy();
-    println("networkinputs" +networkInputs);
+    
   }
 
   void setLayerInputs(FloatList newInputs, int layerIndex) {    //funktion til at sætte inputs i et netværk, i et specifikt lag
