@@ -4,8 +4,8 @@ class World {
   int NumEntity;
 
   ArrayList<mover> movers = new ArrayList<mover>();
-  ArrayList<mover> moverClones = new ArrayList<mover>();
-  ArrayList<mover> matingPool = new ArrayList<mover>();
+  ArrayList<mover> moverClones =new ArrayList<mover>();
+  ArrayList<mover> matingPool= new ArrayList<mover>();
 
   float mutationRate = 0.01;
   float moverSize = 15;
@@ -27,7 +27,7 @@ class World {
   void runSimulation() {
     for (int j = movers.size()-1; j >= 0; j--) {
       mover m = movers.get(j);
-      if (m.dead == false) {
+      if (dead == false) {
         m.show();
         m.update();
         m.getAngleMiddle();
@@ -44,8 +44,7 @@ class World {
     matingPool.clear();                               //fjern de gamle
     float maxFitness = getBestMover().fitness;         //find den bedste
 
-    for (int i = 0; i < moverClones.size(); i++) { //for alle døde 
-          println(moverClones.get(i).fitness);
+    for (int i = 0; i < moverClones.size(); i++) {                                   //for alle døde 
       float fitnessNormal = map(moverClones.get(i).fitness, 0, maxFitness, 0, 1);    //normaliser fitness
       int n = (int) (fitnessNormal*100);                                             
       for (int j = 0; j < n; j++) {                                                  //således vi kan havde en vægtet matingPool

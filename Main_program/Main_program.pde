@@ -3,11 +3,11 @@ World w;
 int numE;
 PImage track;
 
-boolean dead = false;
+
 
 void setup() {
   size(1084, 684);
-  numE = 2;
+  numE = 50;
   w = new World(numE);
   track = loadImage("track.png");
 }
@@ -87,6 +87,7 @@ void showBestNetwork() {
         float Cy = map((30+30*k), 0, (30+30*(numN2)), 0, 150);
         float Cx = map((50+50*(i+1)), 0, (50+50*(numL+1)), 30, 300);
         line(x, y, Cx, Cy);
+        
       }
       ellipse(x, y, 20, 20); // tegn en neuron
     }

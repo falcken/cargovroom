@@ -19,19 +19,18 @@ class mover {
   float totalright;
   float calfitness;
   FloatList moverInputs = new FloatList();
-  boolean dead = false;
 
 
-  float fitness=1;
+  float fitness;
 
   float dist1, dist2, dist3;
 
   NeuralNetwork NN = new NeuralNetwork();
   mover(NeuralNetwork network, PVector pos, float s) {
     NN = network;
-    NN.addLayer(3, 3);
-    NN.addLayer(3, 4);
-    NN.addLayer(4, 2);
+    NN.addLayer(3, 6);
+    NN.addLayer(6, 2);
+  
 
     loc.set(pos);
     size=s;
@@ -193,7 +192,7 @@ class mover {
         }
       }
     }
-    //println(timer, wrongtimer, stoptimer, totalright);
+
   }
 
   void drive() {
@@ -201,11 +200,8 @@ class mover {
     moverInputs.append(dist1);
     moverInputs.append(dist2);
     moverInputs.append(dist3);
-    println(dist1, dist2, dist3);
-    println(moverInputs);
-   
 
-
+ 
     NN.processInputsToOutputs(moverInputs);                                          
 
     PVector forward;
