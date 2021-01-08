@@ -26,14 +26,14 @@ class Neuron {
     bias = tempBias;
   }
 
-  float getNeuronOutput(float[] LI) {
-    if (LI.length != connections.size()) {
+  float getNeuronOutput(FloatList LI) {
+    if (LI.size() != connections.size()) {
       exit();
     }
     neuronInput = 0;
 
     for (int i = 0; i < connections.size(); i++) {
-      neuronInput += connections.get(i).calcConnOutput(LI[i]);
+      neuronInput += connections.get(i).calcConnOutput(LI.get(i));
     }
     neuronInput += bias;
     neuronOutput = ActivateValue(neuronInput);

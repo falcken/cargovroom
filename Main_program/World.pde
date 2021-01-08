@@ -4,8 +4,8 @@ class World {
   int NumEntity;
 
   ArrayList<mover> movers = new ArrayList<mover>();
-  ArrayList<mover> moverClones;
-  ArrayList<mover> matingPool;
+  ArrayList<mover> moverClones = new ArrayList<mover>();
+  ArrayList<mover> matingPool = new ArrayList<mover>();
 
   float mutationRate = 0.01;
   float moverSize = 15;

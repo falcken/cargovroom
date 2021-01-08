@@ -46,18 +46,20 @@ class Layer {
 
   void setInputs(FloatList inputs) {
     layerInputs.clear();              //sæt inputs i et lag
-    layerInputs = inputs;
+    layerInputs = inputs.copy();
+    println("layerinputs" + layerInputs);
   }
   void processInputsToOutputs() {       //lav inputs til outputs i et lag
     int neuronCount = neurons.size();
 
     if (neuronCount > 0) {                //check at der er en neuron til at tage input
       if (layerInputs.size() != neurons.get(0).connections.size()) {   // check at der er nok
-        println("Error in Layer: processInputsToOutputs: The number of inputs do NOT match the number of Neuron connections in this layer");
+        println("Error in Layer: processInputsToOutputs: The number of inputs do NOT match the number of Neuron connections in this layer " + neurons.get(0).connections.size()+ " " + layerInputs.size());
         exit();
       } else {
+        layerOutputs.clear();
         for (int i=0; i<neuronCount; i++) {  // regn et output
-          layerOutputs.append(neurons.get(i).getNeuronOutput(layerInputs.array()));
+          layerOutputs.append(neurons.get(i).getNeuronOutput(layerInputs));
         }
       }
     } else {

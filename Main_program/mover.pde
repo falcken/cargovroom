@@ -28,8 +28,8 @@ class mover {
   NeuralNetwork NN = new NeuralNetwork();
   mover(NeuralNetwork network, PVector pos, float s) {
     NN = network;
-    NN.addLayer(2, 2);
-    NN.addLayer(2, 4);
+    NN.addLayer(3, 3);
+    NN.addLayer(3, 4);
     NN.addLayer(4, 2);
 
     loc.set(pos);
@@ -192,13 +192,17 @@ class mover {
         }
       }
     }
-    println(timer, wrongtimer, stoptimer, totalright);
+    //println(timer, wrongtimer, stoptimer, totalright);
   }
 
   void drive() {
+    moverInputs.clear();
     moverInputs.append(dist1);
     moverInputs.append(dist2);
     moverInputs.append(dist3);
+    println(dist1, dist2, dist3);
+    println(moverInputs);
+   
 
 
     NN.processInputsToOutputs(moverInputs);                                          

@@ -12,7 +12,8 @@ class NeuralNetwork {
 
   void setInputs(FloatList newInputs) {                         //funktion til at sætte inputs i et netværk
     networkInputs.clear();
-    networkInputs = newInputs;
+    networkInputs = newInputs.copy();
+    println("networkinputs" +networkInputs);
   }
 
   void setLayerInputs(FloatList newInputs, int layerIndex) {    //funktion til at sætte inputs i et netværk, i et specifikt lag
@@ -33,7 +34,7 @@ class NeuralNetwork {
 
     if (layers.size() > 0) {                                      //tjek at nummeret af inputs passer til det neurale netværk
       if (networkInputs.size() != layers.get(0).neurons.get(0).connections.size()) {
-        println("NN Error: processInputsToOutputs: The number of inputs do NOT match the NN");
+        println("NN Error: processInputsToOutputs: The number of inputs do NOT match the NN "+layers.get(0).neurons.size()+ " input: "+networkInputs.size());
         exit();
       } else {                                                            //nu hvor det passer
         for (int i = 0; i < layers.size(); i++) {                         //sætter vi inputs for hvert af lagene
