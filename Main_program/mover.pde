@@ -13,10 +13,17 @@ class mover {
   float speed = 0.4;
   float visionLength = 100;
   float angle, angle2, diff;
+  float timer;
+  float stoptimer;
+  float totalright;
+  float calfitness;
 
-  float fitness = 1;
+
+  float fitness;
 
   float dist1, dist2, dist3;
+
+  boolean dead = false;
 
   NeuralNetwork NN = new NeuralNetwork();
   mover(NeuralNetwork network, PVector pos, float s) {
@@ -157,6 +164,30 @@ class mover {
     diff = angle - angle2;
     if (diff > 5 || diff < -5) {
       //println(angle, angle2, diff);
+    }
+  }
+  void dead() {
+    if (dist1 == 0 || dist2 == 0 || dist3 == 0) {
+      dead = true;
+    }
+  }
+  void fitness() {
+    timer = millis();
+    if (diff < 0) {
+      if (diff < 5 || diff > -5) {
+        stoptimer = millis();
+      }
+    }
+    if (diff > 0) {
+      if (diff < 5 || diff > -5) {
+        totalright = timer-stoptimer;
+        calfitness = pow(totalright, 2);
+        if (dead) {
+          fitness = calfitness * 0.9;
+        } else {
+          fitness = calfitness;
+        }
+      }
     }
   }
 }
