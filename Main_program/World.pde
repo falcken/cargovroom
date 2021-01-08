@@ -1,12 +1,12 @@
-ArrayList<mover> movers = new ArrayList<mover>();
 ArrayList<mover> champions = new ArrayList<mover>();
 
 class World {
   int NumEntity;
-  
+
+  ArrayList<mover> movers = new ArrayList<mover>();
   ArrayList<mover> moverClones;
   ArrayList<mover> matingPool;
-  
+
   float mutationRate = 0.01;
   float moverSize = 15;
 
@@ -19,27 +19,30 @@ class World {
     for (int i = 0; i < nE; i++) {
       movers.add(new mover(new NeuralNetwork(), startPos, moverSize));
     }
-    if (firstGen){
+    if (firstGen) {
       champions.add(movers.get(0));
     }
   }
 
   void runSimulation() {
-    for (int j = 0; j < movers.size(); j++) {
+    for (int j = movers.size()-1; j >= 0; j--) {
       mover m = movers.get(j);
-      if(dead == false){
-      m.show();
-      m.update();
-      m.getAngleMiddle();
-      m.dead();
-      m.fitness();
+      if (dead == false) {
+        m.show();
+        m.update();
+        m.getAngleMiddle();
+        m.dead();
+        m.fitness();
+      } else {
+        moverClones.add(m);
+        movers.remove(j);
       }
     }
   }
 
   void moverSelection() {                             //Gør klar til reproduktion
     matingPool.clear();                               //fjern de gamle
-    float maxFitness = getMoverMaxFitness();         //find den bedste
+    float maxFitness = getBestMover().fitness;         //find den bedste
 
     for (int i = 0; i < moverClones.size(); i++) {                                   //for alle døde 
       float fitnessNormal = map(moverClones.get(i).fitness, 0, maxFitness, 0, 1);    //normaliser fitness
@@ -85,10 +88,6 @@ class World {
     moverClones.clear();                                                  //gør klar til næste omgang
   }
 
-  float getMoverMaxFitness() {
-    return 10;
-  }
-  
   void getAllTimeBest() {
     mover champion = champions.get(champions.size()-1);
     mover challenger = getBestMover();

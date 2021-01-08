@@ -18,6 +18,7 @@ class mover {
   float wrongtimer;
   float totalright;
   float calfitness;
+  FloatList moverInputs = new FloatList();
 
 
   float fitness;
@@ -53,6 +54,7 @@ class mover {
     line(width/2, height/2, loc.x, loc.y);
   }
   void update() {
+    drive();
     vel.add(acc);
     loc.add(vel);
     acc.mult(0);
@@ -152,7 +154,6 @@ class mover {
 
     ellipse(e3.x, e3.y, 8, 8);
     fill(255);
-    //println(dist1, dist2, dist3);
   }
 
   void getAngleMiddle() {
@@ -192,5 +193,24 @@ class mover {
       }
     }
     println(timer, wrongtimer, stoptimer, totalright);
+  }
+
+  void drive() {
+    moverInputs.append(dist1);
+    moverInputs.append(dist2);
+    moverInputs.append(dist3);
+
+
+    NN.processInputsToOutputs(moverInputs);                                          
+
+    PVector forward;
+    forward = PVector.fromAngle(radians(heading));
+    applyforce(forward);
+    if (NN.networkOutputs.get(0) > 0.5) {
+      turn(-1);
+    } else if (NN.networkOutputs.get(0) < 0.5) {
+      turn(1);
+    } else {
+    }
   }
 }
