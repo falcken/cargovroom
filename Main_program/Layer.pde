@@ -3,7 +3,7 @@ class Layer {
   FloatList layerWeights = new FloatList();               //Vægt og bias for et helt lag
   FloatList layerInputs = new FloatList(); 
   FloatList layerOutputs = new FloatList(); 
-  
+
   Layer(int ConnectionNum, int NeuronNum) {
     for (int i = 0; i < NeuronNum; i++) {
       Neuron tempNeuron = new Neuron(ConnectionNum);                        //lav en neuron
@@ -13,7 +13,7 @@ class Layer {
       }
     }
   }
-  
+
   void addNeuron(Neuron n) {           //funktion til at tilføje en neuron
     neurons.add(n);
   }
@@ -39,12 +39,12 @@ class Layer {
         n.setBias(nW.get(i));   // når alle vægte er gemt sætter vi en bias     
         layerWeights.append(nW.get(i));         //og gemmer den i listerne
         n.connectionWeights.append(nW.get(i));                                                    
-        i++;                                   
+        i++;
       }
     }
   }
-  
-    void setInputs(FloatList inputs) {
+
+  void setInputs(FloatList inputs) {
     layerInputs.clear();              //sæt inputs i et lag
     layerInputs = inputs;
   }

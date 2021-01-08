@@ -5,7 +5,7 @@ class mover {
   PVector vel = new PVector(0, 0);
   PVector mid = new PVector(width/2, height/2);
   PVector midmov = new PVector();
-  PVector xaxes = new PVector(1,0);
+  PVector xaxes = new PVector(1, 0);
 
   float heading = 0;
   float size;
@@ -55,7 +55,6 @@ class mover {
   void applyforce(PVector f) {
     f.setMag(speed);
     acc.set(f);
-
   }
   void turn(int i) {
     heading += turnForce*i;
@@ -149,15 +148,14 @@ class mover {
 
     println(dist1, dist2, dist3);
   }
-    
-  void getAngleMiddle(){
+
+  void getAngleMiddle() {
     midmov = PVector.sub(loc, mid);
     angle2 = angle;
     angle = atan2(xaxes.y-midmov.y, xaxes.x-midmov.x)+PI;
     diff = angle - angle2;
-    if(diff > 5 || diff < -5){
-    println(angle, angle2, diff);
+    if (diff > 5 || diff < -5) {
+      println(angle, angle2, diff);
     }
   }
-
 }

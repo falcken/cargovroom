@@ -7,17 +7,17 @@ class World {
   ArrayList<mover> matingPool;
   float mutationRate = 0.01;
   float moverSize = 15;
-  PVector startPos = new PVector(width/2,height/2);
+  PVector startPos = new PVector(width/2, height/2);
 
-  
-  
+
+
   World(int nE) {
     for (int i = 0; i < nE; i++) {
       movers.add(new mover(new NeuralNetwork(), startPos, moverSize));
     }
   }
-  
-    void runSimulation() {
+
+  void runSimulation() {
     for (int j = 0; j < movers.size(); j++) {
       mover m = movers.get(j);
       m.show();
@@ -25,8 +25,8 @@ class World {
       m.getAngleMiddle();
     }
   }
-  
-   void moverSelection() {                             //Gør klar til reproduktion
+
+  void moverSelection() {                             //Gør klar til reproduktion
     matingPool.clear();                               //fjern de gamle
     float maxFitness = getMoverMaxFitness();         //find den bedste
 
@@ -34,11 +34,11 @@ class World {
       float fitnessNormal = map(moverClones.get(i).fitness, 0, maxFitness, 0, 1);    //normaliser fitness
       int n = (int) (fitnessNormal*100);                                             
       for (int j = 0; j < n; j++) {                                                  //således vi kan havde en vægtet matingPool
-         matingPool.add(moverClones.get(i));                                         //simulerer survival of the fittest
+        matingPool.add(moverClones.get(i));                                         //simulerer survival of the fittest
       }
     }
   }
-    void moverMating() {                        //Fuktion til at finde en mor og en far og krydse deres værider samt muterer
+  void moverMating() {                        //Fuktion til at finde en mor og en far og krydse deres værider samt muterer
     float tempWeight;
 
     for (int i = 0; i < numE; i++) {                 
@@ -64,26 +64,28 @@ class World {
           else                  tempWeight = dadWeights.get(j);
           if (random(1) < mutationRate) tempWeight += random(-0.1, 0.1);       //evt. muter den
           tempWeight = constrain(tempWeight, -1, 1);                           //Sørg for vi holder retningslinjerne
-          childWeights.append(tempWeight);;                                    //gem den nye vægt i barnet
+          childWeights.append(tempWeight);
+          ;                                    //gem den nye vægt i barnet
         }
-          mover mov = movers.get(i);                                           //sæt den tidligere tilfældige movers lag til barnets vægte
-        mov.NN.layers.get(k).setWeights(childWeights);                         
+        mover mov = movers.get(i);                                           //sæt den tidligere tilfældige movers lag til barnets vægte
+        mov.NN.layers.get(k).setWeights(childWeights);
       }
     }
     moverClones.clear();                                                  //gør klar til næste omgang
   }
-  
-  float getMoverMaxFitness(){
+
+  float getMoverMaxFitness() {
     return 10;
   }
-    void getAllTimeBest(){
+  
+  void getAllTimeBest() {
     mover champion = champions.get(champions.size()-1);
     mover challenger = getBestMover();
-    if (challenger.fitness > champion.fitness){
-    champions.add(challenger);
+    if (challenger.fitness > champion.fitness) {
+      champions.add(challenger);
     }
   }
-      mover getBestMover() {                                    //function to return generations best mover
+  mover getBestMover() {                                    //function to return generations best mover
     mover bestMover = moverClones.get(0);
     for (int i = 0; i < moverClones.size(); i++) {
       if (moverClones.get(i).fitness > bestMover.fitness) {
@@ -91,6 +93,5 @@ class World {
       }
     }
     return bestMover;
-    }
-
+  }
 }

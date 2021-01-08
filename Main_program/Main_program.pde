@@ -15,7 +15,6 @@ void draw() {
   background(track);
   w.runSimulation();
   showBestNetwork();
-  
 }
 void keyPressed() {
   if (key == 'w') {
@@ -38,10 +37,10 @@ void keyPressed() {
   }
 }
 
-void showBestNetwork(){
-  fill(0,40);
+void showBestNetwork() {
+  fill(0, 40);
   stroke(0);
   strokeWeight(2);
   rectMode(CORNER);
-  rect(width-301,1,300,150);
+  rect(width-301, 1, 300, 150);
 }
