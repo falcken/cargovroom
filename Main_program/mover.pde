@@ -6,7 +6,7 @@ class mover{
   float heading = 0;
   float size;
   float turnForce = 10;
-  float speed = 0.1;
+  float speed = 0.4;
   
   mover(float x, float y, float s){
     loc.set(x,y);

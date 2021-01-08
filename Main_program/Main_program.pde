@@ -1,17 +1,18 @@
 World w;
 
 int numE;
+PImage track;
 
 void setup() {
-  size(600, 600);
+  size(1084, 684);
   numE = 2;
   w = new World(numE);
-  
+  track = loadImage("track.png");
 }
 
 
 void draw() {
-  background(0);
+  background(track);
   w.runSimulation();
   
 }
