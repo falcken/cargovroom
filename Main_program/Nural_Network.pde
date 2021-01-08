@@ -5,10 +5,6 @@ class NeuralNetwork {
   FloatList networkOutputs = new FloatList();         //outputs of the neural net
 
 
-
-  NeuralNetwork() {
-  }
-
   void addLayer(int ConnectionNum, int NeuronNum) {            //Function to add a Layer to the Neural Network
     layers.add(new Layer(ConnectionNum, NeuronNum));
   }
