@@ -24,7 +24,7 @@ class World {
     }
   }
   
-   void carsSelection() {                             //function to prepare the mating pool for reproduction
+   void moverSelection() {                             //function to prepare the mating pool for reproduction
     matingPool.clear();                         //first we clear the old mating pool
     float maxFitness = getMoverMaxFitness();         //we determine who's the best creature of the generation
 
