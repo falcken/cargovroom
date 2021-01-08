@@ -48,7 +48,7 @@ class mover {
     popMatrix();
     fill(0);
     stroke(0);
-    line(width/2, height/2, midmov.x+width/2, midmov.y+height/2);
+    line(width/2, height/2, midmov.x+475, midmov.y+80);
     line(width/2, height/2, xaxes.x+width/2, xaxes.y+height/2);
     line(width/2, height/2, loc.x, loc.y);
   }
