@@ -2,20 +2,20 @@
 class NeuralNetwork {
   ArrayList<Layer> layers = new ArrayList<Layer>();  
   FloatList networkInputs = new FloatList(); 
-  FloatList networkOutputs = new FloatList();         //outputs of the neural net
+  FloatList networkOutputs = new FloatList();         //Det neurale netværks output
 
 
-  void addLayer(int ConnectionNum, int NeuronNum) {            //Function to add a Layer to the Neural Network
+  void addLayer(int ConnectionNum, int NeuronNum) {            //fuktion til at lave et nyt lag i netværket
     layers.add(new Layer(ConnectionNum, NeuronNum));
   }
 
 
-  void setInputs(FloatList newInputs) {                         //Function to set the inputs of the neural network
+  void setInputs(FloatList newInputs) {                         //funktion til at sætte inputs i et netværk
     networkInputs.clear();
     networkInputs = newInputs;
   }
 
-  void setLayerInputs(FloatList newInputs, int layerIndex) {    //Function to set the inputs of a specific layer
+  void setLayerInputs(FloatList newInputs, int layerIndex) {    //funktion til at sætte inputs i et netværk, i et specifikt lag
     if (layerIndex > layers.size()-1) {
       println("NN Error: setLayerInputs: layerIndex=" + layerIndex + " exceeded limits= " + (layers.size()-1));
     } else {
@@ -23,26 +23,26 @@ class NeuralNetwork {
     }
   }
 
-  void setOutputs(FloatList newOutputs) {                 //Function to set the outputs of the neural network
+  void setOutputs(FloatList newOutputs) {                 //funktion til at sætte outputs i et netværk
     networkOutputs = newOutputs;
   }
 
 
-  void processInputsToOutputs(FloatList inputs) {              //function to process inputs to outputs using all the layers
+  void processInputsToOutputs(FloatList inputs) {              //funktion til at regne inputs til outputs i alle lag
     setInputs(inputs);
 
-    if (layers.size() > 0) {                                      //make sure that the number ofinputs matches the neuron connections of the first layer
+    if (layers.size() > 0) {                                      //tjek at nummeret af inputs passer til det neurale netværk
       if (networkInputs.size() != layers.get(0).neurons.get(0).connections.size()) {
         println("NN Error: processInputsToOutputs: The number of inputs do NOT match the NN");
         exit();
-      } else {                                                            // number of inputs is fine
-        for (int i = 0; i < layers.size(); i++) {                         //set inputs for the layers
+      } else {                                                            //nu hvor det passer
+        for (int i = 0; i < layers.size(); i++) {                         //sætter vi inputs for hvert af lagene
           if (i==0) {
-            setLayerInputs(networkInputs, i);                             //first layer get inputs from the NN
+            setLayerInputs(networkInputs, i);                             //det første lag får sit input fra det input der kom til det neurale netværk fra moveren
           } else {
-            setLayerInputs(layers.get(i-1).layerOutputs, i);              //other layer get inputs from the previous one
+            setLayerInputs(layers.get(i-1).layerOutputs, i);              //de andre får fra de tidligere lag
           }
-          layers.get(i).processInputsToOutputs();                         //once inputs have been set, convert them to outputs
+          layers.get(i).processInputsToOutputs();                         //når at et lag har fået sit input, regner vi et output
         }
         setOutputs(layers.get(layers.size()-1).layerOutputs);
       }

@@ -1,5 +1,5 @@
 class mover {
-
+  
   PVector loc = new PVector(0, 0);
   PVector acc =  new PVector(0, 0);
   PVector vel = new PVector(0, 0);
@@ -17,7 +17,7 @@ class mover {
 
   NeuralNetwork NN = new NeuralNetwork();
   mover(NeuralNetwork network, PVector pos, float s) {
-    NN = network; 
+    NN = network;
     NN.addLayer(3, 6);
     NN.addLayer(6, 2); 
 

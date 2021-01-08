@@ -1,5 +1,5 @@
 class Connection {
-  float input;  //den værid der skal ganges på en vægten
+  float input;  //den værdi der skal ganges på en vægten
   float weight; //den vægt der skal ganges på værdien
   float output; //den værdi der skal returneres
 
