@@ -6,7 +6,7 @@ class mover{
   float heading = 0;
   float size;
   float turnForce = 10;
-  float speed = 0.05;
+  float speed = 0.1;
   
   mover(float x, float y, float s){
     loc.set(x,y);
@@ -28,6 +28,7 @@ class mover{
   void update(){
     vel.add(acc);
     loc.add(vel);
+    acc.mult(0);
     vel.mult(0.983);
     vel.limit(2);
     
@@ -35,6 +36,7 @@ class mover{
   void applyforce(PVector f){
     f.setMag(speed);;
     acc.set(f);
+    
   }
   void turn(int i){
     heading += turnForce*i;
