@@ -17,6 +17,8 @@ class mover {
   float fitness = 1;
 
   float dist1, dist2, dist3;
+  
+  boolean dead = false;
 
   NeuralNetwork NN = new NeuralNetwork();
   mover(NeuralNetwork network, PVector pos, float s) {
@@ -157,5 +159,13 @@ class mover {
     if (diff > 5 || diff < -5) {
       println(angle, angle2, diff);
     }
+  }
+  void dead(){
+    if(dist1 == 0 || dist2 == 0 || dist3 == 0){
+      dead = true;
+    }
+  }
+  void fitness(){
+    
   }
 }
