@@ -1,10 +1,12 @@
 ArrayList<mover> movers = new ArrayList<mover>();
 ArrayList<mover> champions = new ArrayList<mover>();
+
 class World {
   int NumEntity;
-
+  
   ArrayList<mover> moverClones;
   ArrayList<mover> matingPool;
+  
   float mutationRate = 0.01;
   float moverSize = 15;
 

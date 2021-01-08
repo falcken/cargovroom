@@ -3,7 +3,7 @@ class mover {
   PVector loc = new PVector(0, 0);
   PVector acc =  new PVector(0, 0);
   PVector vel = new PVector(0, 0);
-  PVector mid = new PVector(width/2, height/2);
+  PVector mid = new PVector(475, 80);
   PVector midmov = new PVector();
   PVector xaxes = new PVector(1, 0);
 
