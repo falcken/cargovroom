@@ -21,6 +21,7 @@ class World {
       mover m = movers.get(j);
       m.show();
       m.update();
+      m.getAngleMiddle();
     }
   }
   
