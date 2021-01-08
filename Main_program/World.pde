@@ -1,4 +1,5 @@
 ArrayList<mover> movers = new ArrayList<mover>();
+ArrayList<mover> champions = new ArrayList<mover>();
 class World {
   int NumEntity;
 
@@ -75,5 +76,21 @@ class World {
   float getMoverMaxFitness(){
     return 10;
   }
+    void getAllTimeBest(){
+    mover champion = champions.get(champions.size()-1);
+    mover challenger = getBestMover();
+    if (challenger.fitness > champion.fitness){
+    champions.add(challenger);
+    }
+  }
+      mover getBestMover() {                                    //function to return generations best mover
+    mover bestMover = moverClones.get(0);
+    for (int i = 0; i < moverClones.size(); i++) {
+      if (moverClones.get(i).fitness > bestMover.fitness) {
+        bestMover = moverClones.get(i);
+      }
+    }
+    return bestMover;
+    }
 
 }

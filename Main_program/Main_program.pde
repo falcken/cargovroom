@@ -14,6 +14,7 @@ void setup() {
 void draw() {
   background(track);
   w.runSimulation();
+  showBestNetwork();
   
 }
 void keyPressed() {
@@ -35,4 +36,12 @@ void keyPressed() {
       m.turn(1);
     }
   }
+}
+
+void showBestNetwork(){
+  fill(0,40);
+  stroke(0);
+  strokeWeight(2);
+  rectMode(CORNER);
+  rect(width-301,1,300,150);
 }
