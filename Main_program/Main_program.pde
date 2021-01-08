@@ -66,17 +66,19 @@ void showBestNetwork() {
     for (int j = 0; j < numN; j++) { // for hver neuron i laget
       fill(255, 0, 0);
       float y = map((30+30*j), 0, (30+30*(numN)), 0, 150);
-      float x = map((50+50*i), 0, (50+50*(numL+2)), 0, 300);
+      float x = map((50+50*i), 0, (50+50*(numL+1)), 30, 300);
       int numN2;
       if (i+1 >= 0 && i+1 < numL) {
         Layer l2 = NN.layers.get(i+1);
         numN2 = l2.neurons.size();
-      } else {
+      } else if (i+1 == numL) {
         numN2 = numO;
+      } else {
+        numN2 = 0;
       }
       for (int k = 0; k < numN2; k++) { //for hver neuron i det næste lag
         float Cy = map((30+30*k), 0, (30+30*(numN2)), 0, 150);
-        float Cx = map((50+50*(i+1)), 0, (50+50*(numL+2)), 0, 300);
+        float Cx = map((50+50*(i+1)), 0, (50+50*(numL+1)), 30, 300);
         line(x, y, Cx, Cy);
       }
       ellipse(x, y, 20, 20); // tegn en neuron
