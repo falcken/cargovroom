@@ -148,6 +148,7 @@ class mover {
     fill(255);
 
     println(dist1, dist2, dist3);
+  }
     
   void getAngleMiddle(){
     midmov = PVector.sub(loc, mid);
