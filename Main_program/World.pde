@@ -8,12 +8,16 @@ class World {
   float mutationRate = 0.01;
   float moverSize = 15;
   PVector startPos = new PVector(width/2, height/2);
+  boolean firstGen = true;
 
 
 
   World(int nE) {
     for (int i = 0; i < nE; i++) {
       movers.add(new mover(new NeuralNetwork(), startPos, moverSize));
+    }
+    if (firstGen){
+      champions.add(movers.get(0));
     }
   }
 

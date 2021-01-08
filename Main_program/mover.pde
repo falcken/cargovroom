@@ -21,8 +21,9 @@ class mover {
   NeuralNetwork NN = new NeuralNetwork();
   mover(NeuralNetwork network, PVector pos, float s) {
     NN = network;
-    NN.addLayer(3, 6);
-    NN.addLayer(6, 2);
+    NN.addLayer(2, 2);
+    NN.addLayer(2, 4);
+    NN.addLayer(4, 2);
 
     loc.set(pos);
     size=s;
@@ -145,8 +146,8 @@ class mover {
 
     ellipse(e3.x, e3.y, 8, 8);
     fill(255);
-
-    println(dist1, dist2, dist3);
+     
+    //println(dist1, dist2, dist3);
   }
 
   void getAngleMiddle() {
@@ -155,7 +156,7 @@ class mover {
     angle = atan2(xaxes.y-midmov.y, xaxes.x-midmov.x)+PI;
     diff = angle - angle2;
     if (diff > 5 || diff < -5) {
-      println(angle, angle2, diff);
+      //println(angle, angle2, diff);
     }
   }
 }
