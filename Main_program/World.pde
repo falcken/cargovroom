@@ -7,7 +7,7 @@ class World {
   ArrayList<mover> matingPool;
   float mutationRate = 0.01;
   float moverSize = 15;
-  PVector startPos = new PVector(width/2, height/2);
+  PVector startPos = new PVector(475, 80);
 
 
 
@@ -20,11 +20,12 @@ class World {
   void runSimulation() {
     for (int j = 0; j < movers.size(); j++) {
       mover m = movers.get(j);
-      if(m.dead == true){
+      if(dead == false){
       m.show();
       m.update();
       m.getAngleMiddle();
       m.dead();
+      m.fitness();
       }
     }
   }

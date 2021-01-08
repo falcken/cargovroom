@@ -14,7 +14,8 @@ class mover {
   float visionLength = 100;
   float angle, angle2, diff;
   float timer;
-  float stoptimer;
+  float stoptimer = 0;
+  float wrongtimer;
   float totalright;
   float calfitness;
 
@@ -22,8 +23,6 @@ class mover {
   float fitness;
 
   float dist1, dist2, dist3;
-
-  boolean dead = false;
 
   NeuralNetwork NN = new NeuralNetwork();
   mover(NeuralNetwork network, PVector pos, float s) {
@@ -153,7 +152,7 @@ class mover {
     ellipse(e3.x, e3.y, 8, 8);
     fill(255);
 
-    println(dist1, dist2, dist3);
+    //println(dist1, dist2, dist3);
   }
 
   void getAngleMiddle() {
@@ -161,8 +160,8 @@ class mover {
     angle2 = angle;
     angle = atan2(xaxes.y-midmov.y, xaxes.x-midmov.x)+PI;
     diff = angle - angle2;
-    if (diff > 5 || diff < -5) {
-      println(angle, angle2, diff);
+    if (diff > 1 || diff < -1) {
+      //println(angle, angle2, diff);
     }
   }
   void dead() {
@@ -173,12 +172,15 @@ class mover {
   void fitness() {
     timer = millis();
     if (diff < 0) {
-      if (diff < 5 || diff > -5) {
-        stoptimer = millis();
+      if (diff < 1 && diff > -1) {
+        stoptimer = totalright;
+        wrongtimer = timer - stoptimer;
       }
+    } else {
+      stoptimer = wrongtimer;
     }
     if (diff > 0) {
-      if (diff < 5 || diff > -5) {
+      if (diff < 1 && diff > -1) {
         totalright = timer-stoptimer;
         calfitness = pow(totalright, 2);
         if (dead) {
@@ -188,5 +190,6 @@ class mover {
         }
       }
     }
+    println(timer, wrongtimer, stoptimer, totalright);
   }
 }

@@ -3,6 +3,8 @@ World w;
 int numE;
 PImage track;
 
+boolean dead = false;
+
 void setup() {
   size(1084, 684);
   numE = 2;
