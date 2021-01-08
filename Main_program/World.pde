@@ -1,4 +1,5 @@
 ArrayList<mover> movers = new ArrayList<mover>();
+FloatList newWeights = new FloatList(); // skal indeholde de nye vægte man vil havde sat i et nyt netværk
 
 class World {
   int NumEntity;
