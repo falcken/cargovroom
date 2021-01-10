@@ -3,8 +3,6 @@ World w;
 int numE;
 PImage track;
 
-
-
 void setup() {
   size(1084, 684);
   numE = 50;
@@ -15,7 +13,6 @@ void setup() {
 
 void draw() {
   background(track);
-
 
   if (w.moverClones.size() < numE) {
     w.runSimulation();
@@ -51,7 +48,6 @@ void draw() {
 //}
 
 void showNetwork(mover m) {
-
   pushMatrix();
   translate(width-301, 1);
   fill(0, 40);
@@ -116,6 +112,5 @@ void showNetwork(mover m) {
       ellipse(x, y, 20, 20); // tegn en neuron
     }
   }
-
   popMatrix();
 }

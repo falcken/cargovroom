@@ -80,7 +80,7 @@ class World {
           if (random(1) < mutationRate) tempWeight += random(-0.1, 0.1);       //evt. muter den
           tempWeight = constrain(tempWeight, -1, 1);                           //Sørg for vi holder retningslinjerne
           childWeights.append(tempWeight);
-          ;                                    //gem den nye vægt i barnet
+                                              //gem den nye vægt i barnet
         }
         mover mov = movers.get(i);                                           //sæt den tidligere tilfældige movers lag til barnets vægte
         mov.NN.layers.get(k).setWeights(childWeights);
