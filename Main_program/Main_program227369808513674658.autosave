@@ -9,7 +9,7 @@ PImage track;
 
 void setup() {
   size(1084, 684);
-  numE = 100;
+  numE = 50;
   w = new World(numE);
   levelMaker = new LevelMaker();
   track = loadImage("track.png");
@@ -60,9 +60,7 @@ void draw() {
 //      mover m = champions.get(i);
 //      PVector forward;
 //      forward = PVector.fromAngle(radians(m.heading));
-
-//      m.applyforce(forward, false);
-
+//      m.applyforce(forward,true);
 //    }
 //  } else if (key == 'a') {
 //    for (int i = 0; i < champions.size(); i++) {
@@ -76,6 +74,7 @@ void draw() {
 //    }
 //  }
 //}
+
 void mousePressed() {
   float mX = mouseX;
   float mY = mouseY;

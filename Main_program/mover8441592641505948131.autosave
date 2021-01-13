@@ -9,18 +9,12 @@ class mover {
 
   float heading = 0;
   float size;
-
-  float turnForce = 5;
-  float speed = 4;
+  float turnForce = 3;
+  float speed = 1;
   float lowSpeed = 0.5;
   float visionLength = 50;
   float angle, angle2, diff;
-  float difftotal = 0;
   float timer;
-  float wait;
-  float speedtimer;
-  float lasttime = 0;
-  float timearound = 0;
   float stoptimer = 0;
   float wrongtimer;
   float totalright;
@@ -45,7 +39,7 @@ class mover {
   }
 
   void show() {
-    
+    fill = color(255,0,0);
     pushMatrix();
     translate(loc.x, loc.y);
     rotate(radians(heading));
@@ -92,17 +86,12 @@ class mover {
 
     // check walls
     for (int i = 0; i < visionLength; i++) {
-      color buffer;
       PVector e = new PVector(1.5, 0);
       float x = e.x*i;
       float y = e.y*i;
       int realX = int(screenX(x, y));
       int realY = int(screenY(x, y));
-      if (realX < width && realY < height) {
-        buffer = track.pixels[realY*width+realX];
-      } else {
-        buffer = color(255, 255, 255);
-      }
+      color buffer = track.pixels[realY*width+realX];
 
       if (red(buffer) == red(color(255))) {
         fill(255, 0, 0);
@@ -125,18 +114,13 @@ class mover {
 
     // check walls
     for (int i = 0; i < visionLength; i++) {
-      color buffer;
       PVector e = new PVector(1, 0.75);
       float x = e.x*i;
       float y = e.y*i;
       int realX = int(screenX(x, y));
       int realY = int(screenY(x, y));
-      if (realX < width && realY < height) {
-        buffer = track.pixels[realY*width+realX];
-      } else {
-        buffer = color(255, 255, 255);
-      }
-      
+      color buffer = track.pixels[realY*width+realX];
+
       if (red(buffer) == red(color(255))) {
         fill(255, 0, 0);
         dist2 = i;
@@ -157,17 +141,13 @@ class mover {
     fill(0, 255, 0);
 
     for (int i = 0; i < visionLength; i++) {
-      color buffer;
       PVector e = new PVector(1, -0.75);
       float x = e.x*i;
       float y = e.y*i;
       int realX = int(screenX(x, y));
       int realY = int(screenY(x, y));
-      if (realX < width && realY < height) {
-        buffer = track.pixels[realY*width+realX];
-      } else {
-        buffer = color(255, 255, 255);
-      }
+      color buffer = track.pixels[realY*width+realX];
+
       if (red(buffer) == red(color(255))) {
         fill(255, 0, 0);
         dist3 = i;
@@ -191,26 +171,6 @@ class mover {
 
     if (diff > 1 || diff < -1) {
       //println(angle, angle2, diff);
-    }
-  }
-  void speedLap(){
-    speedtimer = millis();
-    
-    if(angle2 != 0){
-    difftotal += diff;
-    //println("difftotal: "+difftotal+" diff: "+ diff);
-    //println(angle);
-    }
-    
-    if (angle > 2.7 && angle < 3.0){
-      if (wait + 2000 < speedtimer){
-      
-      timearound = speedtimer - lasttime;
-      lasttime = speedtimer;
-      wait = millis();
-      
-      println("tid :"+timearound+"timer :"+ speedtimer+"lasttime :"+lasttime);
-      }
     }
   }
   void dead() {
@@ -250,9 +210,9 @@ class mover {
     moverInputs.append(vel.mag());
 
     NN.processInputsToOutputs(moverInputs);                                          
-    if (NN.networkOutputs.get(0) > 0.5) {
+    if (NN.networkOutputs.get(0) > 0) {
       turn(-1);
-    } else if (NN.networkOutputs.get(0) < -0.5) {
+    } else if (NN.networkOutputs.get(0) < 0) {
       turn(1);
     } 
     if (NN.networkOutputs.get(1) > 0) {
