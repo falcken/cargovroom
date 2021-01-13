@@ -31,6 +31,7 @@ class World {
         m.show();
         m.update();
         m.getAngleMiddle();
+        m.speedLap();
         m.dead();
         m.fitness();
       } else {
@@ -45,7 +46,7 @@ class World {
     float maxFitness = getBestMover().fitness;         //find den bedste
 
     for (int i = 0; i < moverClones.size(); i++) { //for alle døde 
-          println(moverClones.get(i).fitness);
+          //println(moverClones.get(i).fitness);
       float fitnessNormal = map(moverClones.get(i).fitness, 0, maxFitness, 0, 1);    //normaliser fitness
       int n = (int) (fitnessNormal*100);                                             
       for (int j = 0; j < n; j++) {                                                  //således vi kan havde en vægtet matingPool

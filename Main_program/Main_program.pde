@@ -28,20 +28,20 @@ void draw() {
 
 //void keyPressed() {
 //  if (key == 'w') {
-//    for (int i = 0; i < movers.size(); i++) {
-//      mover m = movers.get(i);
+//    for (int i = 0; i < champions.size(); i++) {
+//      mover m = champions.get(i);
 //      PVector forward;
 //      forward = PVector.fromAngle(radians(m.heading));
-//      m.applyforce(forward);
+//      m.applyforce(forward, false);
 //    }
 //  } else if (key == 'a') {
-//    for (int i = 0; i < movers.size(); i++) {
-//      mover m = movers.get(i);
+//    for (int i = 0; i < champions.size(); i++) {
+//      mover m = champions.get(i);
 //      m.turn(-1);
 //    }
 //  } else if (key == 'd') {
-//    for (int i = 0; i < movers.size(); i++) {
-//      mover m = movers.get(i);
+//    for (int i = 0; i < champions.size(); i++) {
+//      mover m = champions.get(i);
 //      m.turn(1);
 //    }
 //  }

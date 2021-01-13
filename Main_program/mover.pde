@@ -10,11 +10,16 @@ class mover {
   float heading = 0;
   float size;
   float turnForce = 3;
-  float speed = 1;
+  float speed = 3;
   float lowSpeed = 0.5;
   float visionLength = 50;
   float angle, angle2, diff;
+  float difftotal = 0;
   float timer;
+  float wait;
+  float speedtimer;
+  float lasttime = 0;
+  float timearound = 0;
   float stoptimer = 0;
   float wrongtimer;
   float totalright;
@@ -170,6 +175,26 @@ class mover {
 
     if (diff > 1 || diff < -1) {
       //println(angle, angle2, diff);
+    }
+  }
+  void speedLap(){
+    speedtimer = millis();
+    
+    if(angle2 != 0){
+    difftotal += diff;
+    //println("difftotal: "+difftotal+" diff: "+ diff);
+    //println(angle);
+    }
+    
+    if (angle > 2.7 && angle < 3.0){
+      if (wait + 2000 < speedtimer){
+      
+      timearound = speedtimer - lasttime;
+      lasttime = speedtimer;
+      wait = millis();
+      
+      println("tid :"+timearound+"timer :"+ speedtimer+"lasttime :"+lasttime);
+      }
     }
   }
   void dead() {
