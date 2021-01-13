@@ -11,6 +11,7 @@ class mover {
   float size;
   float turnForce = 3;
   float speed = 1;
+  float lowSpeed = 0.5;
   float visionLength = 50;
   float angle, angle2, diff;
   float timer;
@@ -19,9 +20,9 @@ class mover {
   float totalright;
   float calfitness;
   FloatList moverInputs = new FloatList();
-  
+
   boolean dead = false;
-  
+
 
 
   float fitness = 1;
@@ -30,9 +31,9 @@ class mover {
   NeuralNetwork NN = new NeuralNetwork();
   mover(NeuralNetwork network, PVector pos, float s) {
     NN = network;
-    NN.addLayer(3, 6);
-    NN.addLayer(6, 1);
-
+    NN.addLayer(4, 8);
+    NN.addLayer(8, 4);
+    NN.addLayer(4, 2);
 
     loc.set(pos);
     size=s;
@@ -63,8 +64,12 @@ class mover {
     vel.mult(0.983);
     vel.limit(2);
   }
-  void applyforce(PVector f) {
+  void applyforce(PVector f, boolean a) {
+    if (a){
     f.setMag(speed);
+    } else{
+      f.setMag(lowSpeed);
+    }
     acc.set(f);
   }
   void turn(int i) {
@@ -201,22 +206,23 @@ class mover {
     moverInputs.clear();
     moverInputs.append(dist2);
     moverInputs.append(dist1);
-    
     moverInputs.append(dist3);
- 
-   
-
+    moverInputs.append(vel.mag());
 
     NN.processInputsToOutputs(moverInputs);                                          
-
-    PVector forward;
-    forward = PVector.fromAngle(radians(heading));
-    applyforce(forward);
     if (NN.networkOutputs.get(0) > 0) {
       turn(-1);
     } else if (NN.networkOutputs.get(0) < 0) {
       turn(1);
-    } else {
+    } 
+    if (NN.networkOutputs.get(1) > 0) {
+      PVector forward;
+      forward = PVector.fromAngle(radians(heading));
+      applyforce(forward, true);
+    } else if (NN.networkOutputs.get(1) <= 0) {
+      PVector forward;
+      forward = PVector.fromAngle(radians(heading));
+      applyforce(forward, false);
     }
   }
 }
