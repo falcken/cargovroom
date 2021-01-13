@@ -60,7 +60,9 @@ void draw() {
 //      mover m = champions.get(i);
 //      PVector forward;
 //      forward = PVector.fromAngle(radians(m.heading));
-//      m.applyforce(forward,true);
+
+//      m.applyforce(forward, false);
+
 //    }
 //  } else if (key == 'a') {
 //    for (int i = 0; i < champions.size(); i++) {
