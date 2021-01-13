@@ -22,11 +22,10 @@ class mover {
   FloatList moverInputs = new FloatList();
 
   boolean dead = false;
-
-
-
   float fitness = 1;
   float dist1, dist2, dist3;
+  color fill = color(255,0,0);
+  
 
   NeuralNetwork NN = new NeuralNetwork();
   mover(NeuralNetwork network, PVector pos, float s) {
@@ -43,7 +42,7 @@ class mover {
     pushMatrix();
     translate(loc.x, loc.y);
     rotate(radians(heading));
-    fill(255, 0, 0);
+    fill(fill);
     stroke(255);
     strokeWeight(4);
     rectMode(CENTER);

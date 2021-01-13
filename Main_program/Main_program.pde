@@ -55,7 +55,7 @@ void showNetwork(mover m) {
   strokeWeight(2);
   rectMode(CORNER);
   rect(0, 0, 300, 150);
-  //mover m =   w.movers.get(int(random(w.movers.size())));
+  
 
   NeuralNetwork NN = m.NN;
   int numIn = NN.networkInputs.size();
@@ -113,4 +113,7 @@ void showNetwork(mover m) {
     }
   }
   popMatrix();
+  stroke(0,255,0);
+  m.fill = color(0,255,0);
+  line(m.loc.x,m.loc.y,width-301,150);
 }
