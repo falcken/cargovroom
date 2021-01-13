@@ -13,6 +13,8 @@ class LevelMaker {
     }
     fill(0);
     rect(480, 50, 80, 80);
+    fill(0, 255, 0);
+    rect(518, 50, 4, 80);
     paint();
     button();
     clickDetect();
