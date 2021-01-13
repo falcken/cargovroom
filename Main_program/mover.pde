@@ -224,9 +224,9 @@ class mover {
     moverInputs.append(vel.mag());
 
     NN.processInputsToOutputs(moverInputs);                                          
-    if (NN.networkOutputs.get(0) > 0) {
+    if (NN.networkOutputs.get(0) > 0.5) {
       turn(-1);
-    } else if (NN.networkOutputs.get(0) < 0) {
+    } else if (NN.networkOutputs.get(0) < -0.5) {
       turn(1);
     } 
     if (NN.networkOutputs.get(1) > 0) {
