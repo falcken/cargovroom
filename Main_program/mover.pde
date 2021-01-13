@@ -39,6 +39,7 @@ class mover {
   }
 
   void show() {
+    
     pushMatrix();
     translate(loc.x, loc.y);
     rotate(radians(heading));
