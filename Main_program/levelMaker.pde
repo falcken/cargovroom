@@ -12,7 +12,7 @@ class LevelMaker {
       firstRender = false;
     }
     fill(0);
-    rect(480, 50, 100, 100);
+    rect(480, 50, 80, 80);
     paint();
     button();
     clickDetect();
