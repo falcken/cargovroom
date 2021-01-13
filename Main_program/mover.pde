@@ -21,6 +21,8 @@ class mover {
   float speedtimer;
   float lasttime = 0;
   float timearound = 0;
+  float besttime = 3600000;
+  float count = 0;
   float stoptimer = 0;
   float wrongtimer;
   float totalright;
@@ -98,7 +100,7 @@ class mover {
       float y = e.y*i;
       int realX = int(screenX(x, y));
       int realY = int(screenY(x, y));
-      if (realX < width && realY < height) {
+      if (realX < width && realY < height && realY > 0) {
         buffer = track.pixels[realY*width+realX];
       } else {
         buffer = color(255, 255, 255);
@@ -131,7 +133,7 @@ class mover {
       float y = e.y*i;
       int realX = int(screenX(x, y));
       int realY = int(screenY(x, y));
-      if (realX < width && realY < height) {
+      if (realX < width && realY < height && realY > 0) {
         buffer = track.pixels[realY*width+realX];
       } else {
         buffer = color(255, 255, 255);
@@ -163,7 +165,7 @@ class mover {
       float y = e.y*i;
       int realX = int(screenX(x, y));
       int realY = int(screenY(x, y));
-      if (realX < width && realY < height) {
+      if (realX < width && realY < height && realY > 0) {
         buffer = track.pixels[realY*width+realX];
       } else {
         buffer = color(255, 255, 255);
@@ -209,6 +211,16 @@ class mover {
       lasttime = speedtimer;
       wait = millis();
       
+      if (timearound < besttime){
+        besttime = timearound;
+        
+        count++;
+        
+        if (count > 2){
+          dead = true;
+        }
+      }
+      
       println("tid :"+timearound+"timer :"+ speedtimer+"lasttime :"+lasttime);
       }
     }
@@ -233,9 +245,9 @@ class mover {
         totalright = timer-stoptimer;
         calfitness = pow(totalright, 2);
         if (dead) {
-          fitness = calfitness * 0.9;
+          fitness = calfitness * (1/besttime) * 0.9;
         } else {
-          fitness = calfitness;
+          fitness = calfitness * (1/besttime);
         }
       }
     }
