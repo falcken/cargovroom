@@ -21,31 +21,35 @@ void draw() {
     levelMaker.render();
     if (levelMaker.ready) {
       loadMap();
-  background(track);
-
-  if (w.moverClones.size() < numE) {
-    w.runSimulation();
-    if (w.movers.size() > 0) {
-      if (w.movers.size() > showingNum) {
-        mover m =   w.movers.get(showingNum);
-        showNetwork(m);
-      } else{
-        mover m =   w.movers.get(0);
-        showNetwork(m);
-      }
     }
   } else {
+  
     background(track);
-
+  
     if (w.moverClones.size() < numE) {
       w.runSimulation();
       if (w.movers.size() > 0) {
-        mover m =   w.movers.get(0);
-        showNetwork(m);
+        if (w.movers.size() > showingNum) {
+          mover m =   w.movers.get(showingNum);
+          showNetwork(m);
+        } else{
+          mover m =   w.movers.get(0);
+          showNetwork(m);
+        }
       }
     } else {
-      w.moverSelection();
-      w.moverMating();
+      background(track);
+  
+      if (w.moverClones.size() < numE) {
+        w.runSimulation();
+        if (w.movers.size() > 0) {
+          mover m =   w.movers.get(0);
+          showNetwork(m);
+        }
+      } else {
+        w.moverSelection();
+        w.moverMating();
+      }
     }
   }
 }
