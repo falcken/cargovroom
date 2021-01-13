@@ -214,14 +214,14 @@ class mover {
       if (timearound < besttime){
         besttime = timearound;
         
+        }
         count++;
         
         if (count > 2){
           dead = true;
-        }
       }
       
-      println("tid :"+timearound+"timer :"+ speedtimer+"lasttime :"+lasttime);
+      println("tid :"+timearound+"timer :"+ speedtimer+"lasttime :"+lasttime+ "   "+ count);
       }
     }
   }
