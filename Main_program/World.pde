@@ -27,7 +27,7 @@ class World {
   void runSimulation() {
     for (int j = movers.size()-1; j >= 0; j--) {
       mover m = movers.get(j);
-      if (m.dead == false) {
+      if (m.dead == false && m.passed == false) {
         m.show();
         m.update();
         m.getAngleMiddle();

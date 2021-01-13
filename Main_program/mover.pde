@@ -30,6 +30,7 @@ class mover {
   FloatList moverInputs = new FloatList();
 
   boolean dead = false;
+  boolean passed = false;
   float fitness = 1;
   float dist1, dist2, dist3;
   color fill = color(255,0,0);
@@ -218,7 +219,7 @@ class mover {
         count++;
         
         if (count > 2){
-          dead = true;
+          passed = true;
       }
       
       println("tid :"+timearound+"timer :"+ speedtimer+"lasttime :"+lasttime+ "   "+ count);
