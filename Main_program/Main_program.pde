@@ -1,28 +1,39 @@
 World w;
+LevelMaker levelMaker;
 
 int numE;
+int mapId;
+boolean firstLaunch = true;
 PImage track;
 
 void setup() {
   size(1084, 684);
   numE = 50;
   w = new World(numE);
+  levelMaker = new LevelMaker();
   track = loadImage("track.png");
 }
 
 
 void draw() {
-  background(track);
-
-  if (w.moverClones.size() < numE) {
-    w.runSimulation();
-    if (w.movers.size() > 0) {
-      mover m =   w.movers.get(0);
-      showNetwork(m);
+  if (firstLaunch) {
+    levelMaker.render();
+    if (levelMaker.ready) {
+      loadMap();
     }
   } else {
-    w.moverSelection();
-    w.moverMating();
+    background(track);
+  
+    if (w.moverClones.size() < numE) {
+      w.runSimulation();
+      if (w.movers.size() > 0) {
+        mover m =   w.movers.get(0);
+        showNetwork(m);
+      }
+    } else {
+      w.moverSelection();
+      w.moverMating();
+    }
   }
 }
 
@@ -113,4 +124,9 @@ void showNetwork(mover m) {
     }
   }
   popMatrix();
+}
+
+void loadMap() {
+  track = loadImage("map-"+mapId+".png");
+  firstLaunch = false;
 }

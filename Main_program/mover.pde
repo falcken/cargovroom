@@ -81,12 +81,17 @@ class mover {
 
     // check walls
     for (int i = 0; i < visionLength; i++) {
+      color buffer;
       PVector e = new PVector(1.5, 0);
       float x = e.x*i;
       float y = e.y*i;
       int realX = int(screenX(x, y));
       int realY = int(screenY(x, y));
-      color buffer = track.pixels[realY*width+realX];
+      if (realX < width && realY < height) {
+        buffer = track.pixels[realY*width+realX];
+      } else {
+        buffer = color(255, 255, 255);
+      }
 
       if (red(buffer) == red(color(255))) {
         fill(255, 0, 0);
@@ -109,13 +114,18 @@ class mover {
 
     // check walls
     for (int i = 0; i < visionLength; i++) {
+      color buffer;
       PVector e = new PVector(1, 0.75);
       float x = e.x*i;
       float y = e.y*i;
       int realX = int(screenX(x, y));
       int realY = int(screenY(x, y));
-      color buffer = track.pixels[realY*width+realX];
-
+      if (realX < width && realY < height) {
+        buffer = track.pixels[realY*width+realX];
+      } else {
+        buffer = color(255, 255, 255);
+      }
+      
       if (red(buffer) == red(color(255))) {
         fill(255, 0, 0);
         dist2 = i;
@@ -136,13 +146,17 @@ class mover {
     fill(0, 255, 0);
 
     for (int i = 0; i < visionLength; i++) {
+      color buffer;
       PVector e = new PVector(1, -0.75);
       float x = e.x*i;
       float y = e.y*i;
       int realX = int(screenX(x, y));
       int realY = int(screenY(x, y));
-      color buffer = track.pixels[realY*width+realX];
-
+      if (realX < width && realY < height) {
+        buffer = track.pixels[realY*width+realX];
+      } else {
+        buffer = color(255, 255, 255);
+      }
       if (red(buffer) == red(color(255))) {
         fill(255, 0, 0);
         dist3 = i;
