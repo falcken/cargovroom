@@ -11,6 +11,8 @@ class LevelMaker {
       background(255);
       firstRender = false;
     }
+    fill(0);
+    rect(480, 50, 100, 100);
     paint();
     button();
     clickDetect();

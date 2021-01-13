@@ -9,7 +9,7 @@ class mover {
 
   float heading = 0;
   float size;
-  float turnForce = 3;
+  float turnForce = 5;
   float speed = 4;
   float lowSpeed = 0.5;
   float visionLength = 50;

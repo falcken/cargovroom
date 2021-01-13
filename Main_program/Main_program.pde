@@ -9,7 +9,7 @@ PImage track;
 
 void setup() {
   size(1084, 684);
-  numE = 50;
+  numE = 100;
   w = new World(numE);
   levelMaker = new LevelMaker();
   track = loadImage("track.png");
