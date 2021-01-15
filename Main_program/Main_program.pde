@@ -2,6 +2,8 @@ World w;
 LevelMaker levelMaker;
 
 int numE;
+int timer = 50;
+float time;
 int mapId;
 float countstop = 0;
 boolean firstLaunch = true;
@@ -23,6 +25,7 @@ void setup() {
 
 
 void draw() {
+  time ++;
   if (firstLaunch) {
     levelMaker.render();
     if (levelMaker.ready) {
@@ -46,9 +49,8 @@ void draw() {
       }
     } else {
       background(track); 
-        w.moverSelection();
-        w.moverMating();
-      
+      w.moverSelection();
+      w.moverMating();
     }
   }
 }
@@ -96,6 +98,15 @@ void showNetwork(mover m) {
   strokeWeight(2);
   rectMode(CORNER);
   rect(0, 0, 300, 150);
+  fill(255, 0, 0);
+  rect(150, 170, 150, 50);
+  fill(255);
+  stroke(255);
+  textSize(16);
+  text("Kill Selected Car", 160, 200);
+
+
+
 
 
   NeuralNetwork NN = m.NN;
@@ -161,6 +172,12 @@ void showNetwork(mover m) {
   for (int  i = 0; i < w.movers.size(); i++) {
     if ( i != showingNum) {
       w.movers.get(i).selected = false;
+    }
+  }
+  if (mousePressed && mouseX >= (width-301+150) && mouseY >= 170 && mouseX <= (width-301+300) && mouseY <= 220) {
+    if (time >= timer) {
+      m.dead = true;
+      time = 0;
     }
   }
 }
