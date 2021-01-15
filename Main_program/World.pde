@@ -87,6 +87,7 @@ class World {
         mov.NN.layers.get(k).setWeights(childWeights);
       }
     }
+    generations++;
     moverClones.clear();                                                  //gør klar til næste omgang
   }
 
