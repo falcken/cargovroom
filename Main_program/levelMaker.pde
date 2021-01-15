@@ -34,6 +34,13 @@ class LevelMaker {
     fill(0, 255, 0);
     stroke(0);
     rect(900, 25, 100, 50);
+    pushMatrix();
+      fill(0);
+      translate(900+50, 25+25);
+      textAlign(CENTER);
+      textSize(32);
+      text("Start!", 0, 10);
+      popMatrix();
   }
   
   void clickDetect() {
