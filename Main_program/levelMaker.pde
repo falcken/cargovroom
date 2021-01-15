@@ -66,6 +66,7 @@ class LevelMaker {
     rect(900, 0, 120, 100);
     rect(460, 270, 151, 151);
     mapId = millis();
+    newtime = mapId;
     save("map-"+mapId+".png");
     println("Saved mapId: "+mapId+"!");
     ready = true;

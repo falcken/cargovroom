@@ -2,6 +2,7 @@ ArrayList<mover> champions = new ArrayList<mover>();
 
 class World {
   int NumEntity;
+  int nummerbil = 0;
 
   ArrayList<mover> movers = new ArrayList<mover>();
   ArrayList<mover> moverClones = new ArrayList<mover>();
@@ -17,7 +18,8 @@ class World {
 
   World(int nE) {
     for (int i = 0; i < nE; i++) {
-      movers.add(new mover(new NeuralNetwork(), startPos, moverSize));
+      movers.add(new mover(new NeuralNetwork(), startPos, moverSize, nummerbil));
+      nummerbil++;
     }
     if (firstGen) {
       champions.add(movers.get(0));
@@ -36,6 +38,7 @@ class World {
         m.fitness();
       } else {
         moverClones.add(m);
+        
         movers.remove(j);
       }
     }
@@ -43,6 +46,7 @@ class World {
 
   void moverSelection() {                             //Gør klar til reproduktion
     matingPool.clear();                               //fjern de gamle
+    getAllTimeBest();
     float maxFitness = getBestMover().fitness;         //find den bedste
 
     for (int i = 0; i < moverClones.size(); i++) { //for alle døde 
@@ -58,8 +62,9 @@ class World {
     float tempWeight;
 
     for (int i = 0; i < numE; i++) {                 
-      movers.add(new mover(new NeuralNetwork(), startPos, moverSize)); //først laver vi en tilfældig
-
+      movers.add(new mover(new NeuralNetwork(), startPos, moverSize, nummerbil)); //først laver vi en tilfældig
+      
+      
       int m = int(random(matingPool.size()));          //finder forældre
       int d = int(random(matingPool.size()));
 
@@ -86,16 +91,20 @@ class World {
         mover mov = movers.get(i);                                           //sæt den tidligere tilfældige movers lag til barnets vægte
         mov.NN.layers.get(k).setWeights(childWeights);
       }
+      nummerbil++;
     }
     generations++;
+    newtime = millis();
     moverClones.clear();                                                  //gør klar til næste omgang
   }
 
   void getAllTimeBest() {
     mover champion = champions.get(champions.size()-1);
     mover challenger = getBestMover();
+    showrankings();
     if (challenger.fitness > champion.fitness) {
       champions.add(challenger);
+      
     }
   }
   mover getBestMover() {                                    //function to return generations best mover

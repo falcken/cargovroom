@@ -5,6 +5,7 @@ int generations = 0;
 int numE;
 int timer = 50;
 float time;
+float newtime = 0;
 int mapId;
 float countstop = 0;
 boolean firstLaunch = true;
@@ -13,6 +14,8 @@ PVector yaxes = new PVector(0, -10);
 PVector yaxes2 = new PVector(0, -10);
   
 PImage track;
+
+String bestmovers = "";
 
 void setup() {
   size(1084, 684);
@@ -190,8 +193,20 @@ void loadMap() {
 }
 
 void showrankings(){
-  for (int i = 10; i < champions.size(); i++) {
-    mover m = champions.get(i);
+  bestmovers = "";
+  int k;
+  if (champions.size() > 10){
+    k = champions.size()-10;
+  }else{
+    k = 0;
+  }
+  for (int j = champions.size()-1; j >= k; j--) {
+    mover m = champions.get(j);
+    
+    bestmovers = bestmovers + "Bilens id: "+m.Id+ ", fitness: "+ m.fitness+", hurtigste lap: "+ m.besttime + "\n";
+  }
+  println(bestmovers+"1");
+    
   }
   
 void showInfo() {
@@ -202,4 +217,6 @@ void showInfo() {
   textAlign(LEFT);
   textSize(24);
   text("Generation: "+generations, 35, 50);
+  
+  text(bestmovers, 100, 100);
 }

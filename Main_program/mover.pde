@@ -3,10 +3,11 @@ class mover {
   PVector loc = new PVector(0, 0);
   PVector acc =  new PVector(0, 0);
   PVector vel = new PVector(0, 0);
-  PVector mid = new PVector(475, 80);
+  PVector mid = new PVector(width/2, height/2);
   PVector midmov = new PVector();
   PVector xaxes = new PVector(1, 0);
   
+  int Id;
 
   float heading = 0;
   float size;
@@ -39,14 +40,14 @@ class mover {
   
 
   NeuralNetwork NN = new NeuralNetwork();
-  mover(NeuralNetwork network, PVector pos, float s) {
+  mover(NeuralNetwork network, PVector pos, float s, int id) {
     NN = network;
     NN.addLayer(4, 8);
     NN.addLayer(8, 4);
     NN.addLayer(4, 2);
-
     loc.set(pos);
     size=s;
+    Id = id;
   }
 
   void show() {
@@ -68,7 +69,7 @@ class mover {
     popMatrix();
     fill(0);
     stroke(0);
-    line(width/2, height/2, midmov.x+475, midmov.y+80);
+    line(width/2, height/2, midmov.x+width/2, midmov.y+height/2);
     line(width/2, height/2, xaxes.x+width/2, xaxes.y+height/2);
     line(width/2, height/2, loc.x, loc.y);
     line(width/2, height/2, yaxes.x+width/2, yaxes.y+height/2);
@@ -198,7 +199,10 @@ class mover {
   void getAngleMiddle() {
     midmov = PVector.sub(loc, mid);
     angle2 = angle;
-    angle = atan2(xaxes.y-midmov.y, xaxes.x-midmov.x)+PI;
+    angle = atan2(xaxes.y-midmov.y, xaxes.x-midmov.x)+((PI)/2);
+    //if(angle < PI && angle > 2){
+      //println(angle);
+    //}
     diff = angle - angle2;
     //println(angle);
     if (diff > 1 || diff < -1) {
@@ -243,7 +247,7 @@ class mover {
   }
   
   void fitness() {
-    timer = millis() - mapId;
+    timer = millis() - newtime;
     if (diff < 0) {
       if (diff < 1 && diff > -1) {
         stoptimer = totalright;
