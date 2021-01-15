@@ -103,6 +103,7 @@ void showNetwork(mover m) {
   fill(255);
   stroke(255);
   textSize(16);
+  textAlign(LEFT);
   text("Kill Selected Car", 160, 200);
 
 
