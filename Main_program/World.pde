@@ -10,7 +10,7 @@ class World {
   float mutationRate = 0.01;
   float moverSize = 15;
 
-  PVector startPos = new PVector(475, 80);
+  PVector startPos = new PVector(518, 90);
   boolean firstGen = true;
 
 

@@ -6,6 +6,7 @@ class mover {
   PVector mid = new PVector(475, 80);
   PVector midmov = new PVector();
   PVector xaxes = new PVector(1, 0);
+  
 
   float heading = 0;
   float size;
@@ -21,7 +22,7 @@ class mover {
   float speedtimer;
   float lasttime = 0;
   float timearound = 0;
-  float besttime = 3600000;
+  float besttime = 300000;
   float count = 0;
   float stoptimer = 0;
   float wrongtimer;
@@ -64,6 +65,8 @@ class mover {
     line(width/2, height/2, midmov.x+475, midmov.y+80);
     line(width/2, height/2, xaxes.x+width/2, xaxes.y+height/2);
     line(width/2, height/2, loc.x, loc.y);
+    line(width/2, height/2, yaxes.x+width/2, yaxes.y+height/2);
+    line(width/2, height/2, yaxes2.x+width/2, yaxes2.y+height/2);
   }
   void update() {
     drive();
@@ -191,7 +194,7 @@ class mover {
     angle2 = angle;
     angle = atan2(xaxes.y-midmov.y, xaxes.x-midmov.x)+PI;
     diff = angle - angle2;
-
+    //println(angle);
     if (diff > 1 || diff < -1) {
       //println(angle, angle2, diff);
     }
@@ -200,15 +203,20 @@ class mover {
     speedtimer = millis();
     
     if(angle2 != 0){
+      if (diff < 1 && diff > -1) {
     difftotal += diff;
     //println("difftotal: "+difftotal+" diff: "+ diff);
     //println(angle);
+      }
     }
     
     if (angle > 2.7 && angle < 3.0){
-      if (wait + 2000 < speedtimer){
+      if (wait + 5000 < speedtimer){
       
       timearound = speedtimer - lasttime;
+      if(count == 0){
+        timearound = timearound - countstop;
+      }
       lasttime = speedtimer;
       wait = millis();
       
@@ -220,19 +228,16 @@ class mover {
         
         if (count > 2){
           passed = true;
+          countstop = millis();
       }
       
-      println("tid :"+timearound+"timer :"+ speedtimer+"lasttime :"+lasttime+ "   "+ count);
+      println("tid :"+timearound+"timer :"+ speedtimer+"lasttime :"+lasttime+ "   "+ count+ "    " + wait + "   " +speedtimer);
       }
     }
   }
-  void dead() {
-    if (dist1 == 0 || dist2 == 0 || dist3 == 0) {
-      dead = true;
-    }
-  }
+  
   void fitness() {
-    timer = millis();
+    timer = millis() - mapId;
     if (diff < 0) {
       if (diff < 1 && diff > -1) {
         stoptimer = totalright;
@@ -253,6 +258,12 @@ class mover {
       }
     }
     //println(timer, wrongtimer, stoptimer, totalright);
+  }
+  void dead() {
+    if (dist1 == 0 || dist2 == 0 || dist3 == 0) {
+      dead = true;
+      println(timer, wrongtimer, totalright, millis());
+    }
   }
 
   void drive() {

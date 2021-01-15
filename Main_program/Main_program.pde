@@ -3,16 +3,22 @@ LevelMaker levelMaker;
 
 int numE;
 int mapId;
+float countstop = 0;
 boolean firstLaunch = true;
 int showingNum = 0;
+PVector yaxes = new PVector(0, -10);
+PVector yaxes2 = new PVector(0, -10);
+  
 PImage track;
 
 void setup() {
   size(1084, 684);
-  numE = 100;
+  numE = 25;
   w = new World(numE);
   levelMaker = new LevelMaker();
   track = loadImage("track.png");
+  yaxes.rotate(map(2.5, 0, PI, 0, 2*PI));
+  yaxes2.rotate(map(PI, 0, PI, 0, 2*PI));
 }
 
 
