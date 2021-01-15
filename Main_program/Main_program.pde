@@ -19,7 +19,7 @@ String bestmovers = "";
 
 void setup() {
   size(1084, 684);
-  numE = 25;
+  numE = 50;
   w = new World(numE);
   levelMaker = new LevelMaker();
   track = loadImage("track.png");
@@ -208,6 +208,7 @@ void showrankings(){
   println(bestmovers+"1");
     
   }
+}
   
 void showInfo() {
   noStroke();
