@@ -9,6 +9,12 @@ class LevelMaker {
   void render() {
     if (firstRender) {
       background(255);
+      fill(255, 0, 0);
+      rect(460, 270, 150, 150);
+      fill(0);
+      textAlign(CENTER);
+      textSize(24);
+      text("SAFEZONE", 535, 350);
       firstRender = false;
     }
     fill(0);
@@ -24,7 +30,9 @@ class LevelMaker {
     if (mousePressed) {
       fill(0);
       noStroke();
-      if (!saving) {
+      if (mouseX > 460-37 && mouseX < 610+37 && mouseY > 280-37 && mouseY < 430+37) {
+        println("safezone");
+      } else if (!saving) {
         ellipse(mouseX, mouseY, 75, 75);
       }
     }
@@ -56,6 +64,7 @@ class LevelMaker {
     fill(255);
     noStroke();
     rect(900, 0, 120, 100);
+    rect(460, 270, 151, 151);
     mapId = millis();
     save("map-"+mapId+".png");
     println("Saved mapId: "+mapId+"!");
