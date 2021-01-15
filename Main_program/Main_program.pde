@@ -169,3 +169,10 @@ void loadMap() {
   track = loadImage("map-"+mapId+".png");
   firstLaunch = false;
 }
+
+void showrankings(){
+  for (int i = 10; i < champions.size(); i++) {
+    mover m = champions.get(i);
+  }
+    
+}
