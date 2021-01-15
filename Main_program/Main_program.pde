@@ -23,33 +23,26 @@ void draw() {
       loadMap();
     }
   } else {
-  
+
     background(track);
-  
+
     if (w.moverClones.size() < numE) {
       w.runSimulation();
       if (w.movers.size() > 0) {
         if (w.movers.size() > showingNum) {
           mover m =   w.movers.get(showingNum);
           showNetwork(m);
-        } else{
-          mover m =   w.movers.get(0);
+        } else {
+          showingNum = 0;
+          mover m =   w.movers.get(showingNum);
           showNetwork(m);
         }
       }
     } else {
-      background(track);
-  
-      if (w.moverClones.size() < numE) {
-        w.runSimulation();
-        if (w.movers.size() > 0) {
-          mover m =   w.movers.get(0);
-          showNetwork(m);
-        }
-      } else {
+      background(track); 
         w.moverSelection();
         w.moverMating();
-      }
+      
     }
   }
 }
@@ -83,7 +76,6 @@ void mousePressed() {
     for (int i = 0; i < w.movers.size(); i++) {
       mover m =   w.movers.get(i);
       if (mX >= m.loc.x-5 && mY >= m.loc.y-5 && mX <= m.loc.x + m.size*2+5 && mY <= m.loc.y + m.size+5) {
-        w.movers.get(showingNum).fill = color(255,0,0);
         showingNum = i;
       }
     }
@@ -157,8 +149,14 @@ void showNetwork(mover m) {
   }
   popMatrix();
   stroke(0, 255, 0);
-  m.fill = color(0, 255, 0);
+  m.selected = true;
   line(m.loc.x, m.loc.y, width-301, 150);
+
+  for (int  i = 0; i < w.movers.size(); i++) {
+    if ( i != showingNum) {
+      w.movers.get(i).selected = false;
+    }
+  }
 }
 
 void loadMap() {
