@@ -69,11 +69,11 @@ class mover {
     popMatrix();
     fill(0);
     stroke(0);
-    line(width/2, height/2, midmov.x+width/2, midmov.y+height/2);
-    line(width/2, height/2, xaxes.x+width/2, xaxes.y+height/2);
-    line(width/2, height/2, loc.x, loc.y);
-    line(width/2, height/2, yaxes.x+width/2, yaxes.y+height/2);
-    line(width/2, height/2, yaxes2.x+width/2, yaxes2.y+height/2);
+    //line(width/2, height/2, midmov.x+width/2, midmov.y+height/2);
+    //line(width/2, height/2, xaxes.x+width/2, xaxes.y+height/2);
+    //line(width/2, height/2, loc.x, loc.y);
+    //line(width/2, height/2, yaxes.x+width/2, yaxes.y+height/2);
+    //line(width/2, height/2, yaxes2.x+width/2, yaxes2.y+height/2);
   }
   void update() {
     drive();

@@ -9,17 +9,22 @@ float newtime = 0;
 int mapId;
 float countstop = 0;
 boolean firstLaunch = true;
+boolean show = true;
+boolean show2 = false;
 int showingNum = 0;
 PVector yaxes = new PVector(0, -10);
 PVector yaxes2 = new PVector(0, -10);
-  
+
 PImage track;
 
 String bestmovers = "";
 
+color c1 = 255;
+color c2 = 255;
+
 void setup() {
   size(1084, 684);
-  numE = 50;
+  numE = 10;
   w = new World(numE);
   levelMaker = new LevelMaker();
   track = loadImage("track.png");
@@ -37,6 +42,7 @@ void draw() {
     }
   } else {
     background(track);
+    knap();
     showInfo();
 
     if (w.moverClones.size() < numE) {
@@ -52,7 +58,7 @@ void draw() {
         }
       }
     } else {
-      background(track); 
+      //background(track); 
       w.moverSelection();
       w.moverMating();
     }
@@ -192,32 +198,84 @@ void loadMap() {
   firstLaunch = false;
 }
 
-void showrankings(){
+void showrankings() {
   bestmovers = "";
   int k;
-  if (champions.size() > 10){
+  int tal = 1;
+  if (champions.size() > 10) {
     k = champions.size()-10;
-  }else{
+  } else {
     k = 0;
   }
   for (int j = champions.size()-1; j >= k; j--) {
     mover m = champions.get(j);
-    
-    bestmovers = bestmovers + "Bilens id: "+m.Id+ ", fitness: "+ m.fitness+", hurtigste lap: "+ m.besttime + "\n";
+
+    bestmovers = bestmovers + "#"+tal+" Bilens id: "+m.Id+ ", fitness: "+ m.fitness+", hurtigste lap: "+ m.besttime + "\n";
+    tal++;
   }
   println(bestmovers+"1");
-    
+}
+
+void showInfo() {
+  stroke(0);
+  if (show) {
+    fill(c1);
+    rect(10, 10, 150, 45);
+    pushMatrix();
+    translate(10+75, 10+30);
+    fill(0);
+    textAlign(CENTER);
+    textSize(24);
+    text("Show Data", 0, 0);
+    popMatrix();
+  }
+  if (show2) {
+    stroke(0);
+    fill(255);
+    rect(0, 0, 200, 684);
+    fill(c2);
+    rect(175, 5, 15, 15);
+    line(175, 5, 175+15, 5+15);
+    line(175, 5+15, 175+15, 5);
+    fill(0);
+    textAlign(LEFT);
+    textSize(14);
+    text("Generation: "+generations, 10, 25);
+    textSize(24);
+    textAlign(CENTER);
+    text("HIGH SCORE: ", 100, 60);
+    fill(255);
+    //rect(0, 75, 20, 225);
+    fill(0);
+    textAlign(LEFT);
+    textSize(14);
+    text(bestmovers, 10, 75, 200, 684);
   }
 }
-  
-void showInfo() {
-  noStroke();
-  fill(255);
-  rect(40, 40, 100, 50);
-  fill(0);
-  textAlign(LEFT);
-  textSize(24);
-  text("Generation: "+generations, 35, 50);
-  
-  text(bestmovers, 100, 100);
+void knap() {
+  if (mouseX > 10 && mouseX < 10+150 && mouseY > 10 && mouseY < 10+45) {
+    c1 = 175;
+  } else {
+    c1 = 255;
+  }
+  if (mouseX > 175 && mouseX < 175+15 && mouseY > 5 && mouseY < 5+15) {
+        c2 = 175;
+  } else {
+    c2 = 255;
+      }
+  if (mousePressed) {
+    //println(mouseX, mouseY);
+    if (show) {
+      if (mouseX > 10 && mouseX < 10+150 && mouseY > 10 && mouseY < 10+45) {
+        show = false;
+        show2 = true;
+      }
+    }
+    if (show2) {
+      if (mouseX > 175 && mouseX < 175+15 && mouseY > 5 && mouseY < 5+15) {
+        show = true;
+        show2 = false;
+      }
+    }
+  }
 }
