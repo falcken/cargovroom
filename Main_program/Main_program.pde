@@ -16,7 +16,7 @@ PImage track;
 
 void setup() {
   size(1084, 684);
-  numE = 25;
+  numE = 50;
   w = new World(numE);
   levelMaker = new LevelMaker();
   track = loadImage("track.png");
@@ -193,6 +193,7 @@ void showrankings(){
   for (int i = 10; i < champions.size(); i++) {
     mover m = champions.get(i);
   }
+}
   
 void showInfo() {
   noStroke();
