@@ -32,9 +32,10 @@ class mover {
 
   boolean dead = false;
   boolean passed = false;
+  boolean selected = false;
   float fitness = 1;
   float dist1, dist2, dist3;
-  color fill = color(255,0,0);
+  
   
 
   NeuralNetwork NN = new NeuralNetwork();
@@ -53,7 +54,12 @@ class mover {
     pushMatrix();
     translate(loc.x, loc.y);
     rotate(radians(heading));
-    fill(fill);
+    if (selected){
+      fill(0,255,0);
+    }else{
+      fill(255,0,0);
+    }
+    
     stroke(255);
     strokeWeight(4);
     rectMode(CENTER);
