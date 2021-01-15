@@ -1,5 +1,6 @@
 World w;
 LevelMaker levelMaker;
+int generations = 0;
 
 int numE;
 int mapId;
@@ -29,8 +30,8 @@ void draw() {
       loadMap();
     }
   } else {
-
     background(track);
+    showInfo();
 
     if (w.moverClones.size() < numE) {
       w.runSimulation();
@@ -168,4 +169,14 @@ void showNetwork(mover m) {
 void loadMap() {
   track = loadImage("map-"+mapId+".png");
   firstLaunch = false;
+}
+
+void showInfo() {
+  noStroke();
+  fill(255);
+  rect(40, 40, 100, 50);
+  fill(0);
+  textAlign(LEFT);
+  textSize(24);
+  text("Generation: "+generations, 35, 50);
 }
