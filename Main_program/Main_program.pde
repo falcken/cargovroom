@@ -1,7 +1,10 @@
 World w;
 LevelMaker levelMaker;
+int generations = 0;
 
 int numE;
+int timer = 50;
+float time;
 int mapId;
 float countstop = 0;
 boolean firstLaunch = true;
@@ -23,14 +26,15 @@ void setup() {
 
 
 void draw() {
+  time ++;
   if (firstLaunch) {
     levelMaker.render();
     if (levelMaker.ready) {
       loadMap();
     }
   } else {
-
     background(track);
+    showInfo();
 
     if (w.moverClones.size() < numE) {
       w.runSimulation();
@@ -46,9 +50,8 @@ void draw() {
       }
     } else {
       background(track); 
-        w.moverSelection();
-        w.moverMating();
-      
+      w.moverSelection();
+      w.moverMating();
     }
   }
 }
@@ -96,6 +99,16 @@ void showNetwork(mover m) {
   strokeWeight(2);
   rectMode(CORNER);
   rect(0, 0, 300, 150);
+  fill(255, 0, 0);
+  rect(150, 170, 150, 50);
+  fill(255);
+  stroke(255);
+  textSize(16);
+  textAlign(LEFT);
+  text("Kill Selected Car", 160, 200);
+
+
+
 
 
   NeuralNetwork NN = m.NN;
@@ -163,6 +176,12 @@ void showNetwork(mover m) {
       w.movers.get(i).selected = false;
     }
   }
+  if (mousePressed && mouseX >= (width-301+150) && mouseY >= 170 && mouseX <= (width-301+300) && mouseY <= 220) {
+    if (time >= timer) {
+      m.dead = true;
+      time = 0;
+    }
+  }
 }
 
 void loadMap() {
@@ -174,5 +193,13 @@ void showrankings(){
   for (int i = 10; i < champions.size(); i++) {
     mover m = champions.get(i);
   }
-    
+  
+void showInfo() {
+  noStroke();
+  fill(255);
+  rect(40, 40, 100, 50);
+  fill(0);
+  textAlign(LEFT);
+  textSize(24);
+  text("Generation: "+generations, 35, 50);
 }
