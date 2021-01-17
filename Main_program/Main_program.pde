@@ -24,7 +24,7 @@ color c2 = 255;
 
 void setup() {
   size(1084, 684);
-  numE = 10;
+  numE = 50;
   w = new World(numE);
   levelMaker = new LevelMaker();
   track = loadImage("track.png");
